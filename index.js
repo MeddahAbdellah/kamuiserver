@@ -59,6 +59,7 @@ app.post('/login', (req, res) => {
           password: dbResponse[0].password,
           phoneNumber: dbResponse[0].phoneNumber
         };
+        console.log(loginResp);
         res.send(loginResp);
       }
       else res.status(500).send("Internal Error");
