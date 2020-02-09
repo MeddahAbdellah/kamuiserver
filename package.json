@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/MeddahAbdellah/kamuiserver/issues"
   },
-  "homepage": "https://github.com/MeddahAbdellah/kamuiserver#readme"
+  "homepage": "https://github.com/MeddahAbdellah/kamuiserver#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "moment-timezone": "^0.5.27",
+    "mysql": "^2.18.1"
+  }
 }
