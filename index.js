@@ -67,7 +67,9 @@ app.post('/register', (req,res) => {
     password: req.body.password,
     phoneNumber: req.body.phoneNumber
   }, (error, result) => {
-    if (error) throw error;
+    if (error) {
+      console.error(error);
+    }
     res.send(result["affectedRows"]);
   })
 })
