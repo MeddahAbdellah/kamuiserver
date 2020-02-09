@@ -46,6 +46,7 @@ app.get('/', (req, res) => res.send('Server is up!'))
 app.post('/login', (req, res) => {
   let shaHasher = new jsSHA("SHA-256", "TEXT");
   shaHasher.update(req.body.password);
+  console.log(req.body.email+" : "+shaHasher.getHash("HEX"));
   con.query("SELECT * FROM users WHERE email=? AND password=? ", [
     req.body.email,
     shaHasher.getHash("HEX")
