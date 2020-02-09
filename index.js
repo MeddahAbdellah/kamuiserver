@@ -71,8 +71,10 @@ app.post('/register', (req,res) => {
       console.error(error);
       if(error.code==="ER_DUP_ENTRY")res.status(500).send("Email or Phone number already used.");
       else res.status(500).send("Internal Error");
+    }else{
+      console.log(result);
+      res.send(result.affectedRows);
     }
-    res.send(result.affectedRows);
   })
 })
 
