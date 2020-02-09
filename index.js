@@ -5,7 +5,7 @@ const mysql = require('mysql');
 const moment = require('moment-timezone');
 const jsSHA = require("jssha");
 const app = express();
-const HTTP_PORT = 8088;
+const HTTP_PORT = 80;
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
