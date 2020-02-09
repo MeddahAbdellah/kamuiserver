@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require('mysql');
 const moment = require('moment-timezone');
+const jsSHA = require("jssha");
 const app = express();
 const HTTP_PORT = 8088;
 var con = mysql.createConnection({
@@ -41,5 +42,32 @@ app.use(function(req, res, next) {
   // Pass to next layer of middleware()
   next();
 });
+app.get('/login', (req, res) => {
+  let shaHasher = new jsSHA("SHA-256", "TEXT");
+  shaHasher.update(req.query.email);
+  con.query("SELECT * FROM users WHERE ? ", {
+    email: req.query.email,
+    password: shaHasher.getHash("HEX")
+  }, (error, result) => {
+    if (error) throw error;
+    res.send(result);
+  });
+});
+
+app.post('/register', (req,res) => {
+  let shaHasher = new jsSHA("SHA-256", "TEXT");
+  shaHasher.update(req.query.name+req.body.email+req.body.password+ new Date().toString());
+  userHashedID = shaHasher.getHash("HEX");
+  con.query("INSERT INTO users SET ?",{
+    user_id: userHashedID,
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+    phoneNumber: req.body.phoneNumber
+  }, (error, result) => {
+    if (error) throw error;
+    res.send(result);
+  })
+})
 
 app.listen(HTTP_PORT);
