@@ -46,10 +46,10 @@ app.get('/', (req, res) => res.send('Server is up!'))
 app.post('/login', (req, res) => {
   let shaHasher = new jsSHA("SHA-256", "TEXT");
   shaHasher.update(req.body.email);
-  con.query("SELECT * FROM users WHERE ? ", {
-    email: req.query.email,
-    password: shaHasher.getHash("HEX")
-  }, (error, result) => {
+  con.query("SELECT * FROM users WHERE email=? AND password=? ", [
+    req.query.email,
+    shaHasher.getHash("HEX")
+  ], (error, result) => {
     if (error) {console.error(error); res.status(500).send("Internal Error");}
     else{
       console.log(result);
