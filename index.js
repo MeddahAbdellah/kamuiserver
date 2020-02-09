@@ -52,6 +52,7 @@ app.post('/login', (req, res) => {
   }, (error, result) => {
     if (error) {console.error(error); res.status(500).send("Internal Error");}
     else{
+      console.log(result);
       if(result.length>0)res.send(result);
       else res.status(500).send("Internal Error");
     }
