@@ -45,7 +45,7 @@ app.use(function(req, res, next) {
 app.get('/', (req, res) => res.send('Server is up!'))
 app.post('/login', (req, res) => {
   let shaHasher = new jsSHA("SHA-256", "TEXT");
-  shaHasher.update(req.query.email);
+  shaHasher.update(req.body.email);
   con.query("SELECT * FROM users WHERE ? ", {
     email: req.query.email,
     password: shaHasher.getHash("HEX")
@@ -53,9 +53,8 @@ app.post('/login', (req, res) => {
     if (error) {console.error(error); res.status(500).send("Internal Error");}
     else{
       console.log(result);
-      //if(result.length>0)res.send(result);
-    //else res.status(500).send("Internal Error");
-      res.status(500).send("Internal Error");
+      if(result.length>0)res.send(result);
+      else res.status(500).send("Internal Error");
     }
   });
 });
