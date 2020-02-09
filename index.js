@@ -72,7 +72,6 @@ app.post('/register', (req,res) => {
       else res.status(500).send("Internal Error");
     }else{
       dbResponse = JSON.parse(JSON.stringify(result));
-      console.log(dbResponse);
       if(dbResponse.affectedRows==1)res.send("Registration Successful!");
       else res.status(500).send("Internal Error");
     }
