@@ -59,20 +59,21 @@ app.post('/register', (req,res) => {
   let shaHasher = new jsSHA("SHA-256", "TEXT");
   shaHasher.update(req.query.name+req.body.email+req.body.password+ new Date().toString());
   userHashedID = shaHasher.getHash("HEX");
-  con.query("INSERT INTO users SET ?",{
+  sqlParams = {
     user_id: userHashedID,
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
     phoneNumber: req.body.phoneNumber
-  }, (error, result) => {
+  };
+  con.query("INSERT INTO users SET ?",sqlParams, (error, result) => {
     if (error) {
       console.error(error);
       if(error.code==="ER_DUP_ENTRY")res.status(500).send("Email or Phone number already used.");
       else res.status(500).send("Internal Error");
     }else{
       dbResponse = JSON.parse(JSON.stringify(result));
-      if(dbResponse.affectedRows==1)res.send("Registration Successful!");
+      if(dbResponse.affectedRows==1)res.send(sqlParams);
       else res.status(500).send("Internal Error");
     }
   })
