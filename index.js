@@ -59,6 +59,7 @@ app.post('/register', (req,res) => {
   let shaHasher = new jsSHA("SHA-256", "TEXT");
   shaHasher.update(req.query.name+req.body.email+req.body.password+ new Date().toString());
   userHashedID = shaHasher.getHash("HEX");
+  console.log(req.body);
   con.query("INSERT INTO users SET ?",{
     user_id: userHashedID,
     name: req.body.name,
