@@ -1,0 +1,19 @@
+{
+  "name": "kamuiserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MeddahAbdellah/kamuiserver.git"
+  },
+  "author": "meddahabdallah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MeddahAbdellah/kamuiserver/issues"
+  },
+  "homepage": "https://github.com/MeddahAbdellah/kamuiserver#readme"
+}
