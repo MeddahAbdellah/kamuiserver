@@ -59,7 +59,6 @@ app.post('/register', (req,res) => {
   let shaHasher = new jsSHA("SHA-256", "TEXT");
   shaHasher.update(req.query.name+req.body.email+req.body.password+ new Date().toString());
   userHashedID = shaHasher.getHash("HEX");
-  console.log(req.body);
   con.query("INSERT INTO users SET ?",{
     user_id: userHashedID,
     name: req.body.name,
@@ -74,7 +73,7 @@ app.post('/register', (req,res) => {
     }else{
       dbResponse = JSON.parse(JSON.stringify(result));
       console.log(dbResponse);
-      if(dbResponse[0].affectedRows==1)res.send("Registration Successful!");
+      if(dbResponse.affectedRows==1)res.send("Registration Successful!");
       else res.status(500).send("Internal Error");
     }
   })
