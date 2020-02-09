@@ -42,6 +42,7 @@ app.use(function(req, res, next) {
   // Pass to next layer of middleware()
   next();
 });
+app.get('/', (req, res) => res.send('Server is up!'))
 app.get('/login', (req, res) => {
   let shaHasher = new jsSHA("SHA-256", "TEXT");
   shaHasher.update(req.query.email);
