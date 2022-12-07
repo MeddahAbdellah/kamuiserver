@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/MeddahAbdellah/kamuiserver#readme",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
     "jssha": "^2.3.1",
     "moment-timezone": "^0.5.27",
     "mysql": "^2.18.1"
